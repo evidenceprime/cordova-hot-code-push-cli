@@ -1,9 +1,9 @@
 #! /usr/bin/env node
 import yargs from 'yargs';
-import path from 'path';
 import chcpContext from '../dist/context.js';
 
-const argv = yargs.argv;
+const argv = yargs(process.argv.slice(2)).parse();
+const cmd = argv._[0];
 
 function printUsage() {
   console.log('Usage: cordova-hcp <command>');
@@ -14,14 +14,17 @@ function printUsage() {
   process.exit(0);
 }
 
-var cmd = argv[0];
 switch(cmd) {
   case 'build':
   case 'init':
     console.log('Running ' + cmd);
-    var command = require(path.resolve(__dirname, '..', 'dist', cmd + '.js')),
-        context = chcpContext.context(argv);
-    command.execute(context);
+    var context = chcpContext.context(argv);
+    import('../dist/' + cmd + '.js').then(function(command) {
+      command.execute(context);
+    }).catch(function(error) {
+      console.error('Error: ' + error);
+      process.exit(1);
+    });
     break;
   case 'help':
     printUsage();
