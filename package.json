@@ -1,13 +1,13 @@
 {
   "name": "cordova-hot-code-push-cli",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Cordova Hot Code Push CLI",
   "preferGlobal": "true",
   "bin": {
     "cordova-hcp": "bin/cordova-hcp"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "repository": {
     "type": "git",

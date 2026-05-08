@@ -1,7 +1,9 @@
 #! /usr/bin/env node
-var path = require('path'),
-    argv = require('yargs').argv,
-    chcpContext = require(path.resolve(__dirname, '..', 'dist', 'context.js'));
+import yargs from 'yargs';
+import path from 'path';
+import chcpContext from '../dist/context.js';
+
+const argv = yargs.argv;
 
 function printUsage() {
   console.log('Usage: cordova-hcp <command>');
