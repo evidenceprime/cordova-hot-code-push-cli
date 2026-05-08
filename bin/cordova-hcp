@@ -14,7 +14,7 @@ function printUsage() {
   process.exit(0);
 }
 
-var cmd = argv._[0];
+var cmd = argv[0];
 switch(cmd) {
   case 'build':
   case 'init':
