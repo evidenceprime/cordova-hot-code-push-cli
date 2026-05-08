@@ -1,14 +1,9 @@
-'use strict';
-
 (function () {
   var path = require('path'),
-      prompt = require('prompt'),
       fs = require('fs-extra'),
       async = require('async'),
       crypto = require('crypto'),
       Q = require('q'),
-      _ = require('lodash'),
-      createHash = require('crypto').createHash,
       recursive = require('recursive-readdir'),
       hidefile = require('hidefile'),
       chcpContext;
@@ -28,7 +23,7 @@
       var hashQueue = prepareFilesHashQueue(files);
 
       async.parallelLimit(hashQueue, 10, function (err, result) {
-        result.sort(function (a, b) {
+        result.sort((a, b) => {
           return a.file.localeCompare(b.file);
         });
         var json = JSON.stringify(result, null, 2);
@@ -95,8 +90,6 @@
     var hash = crypto.createHash('md5'),
         stream = fs.createReadStream(filename);
 
-    //stream.pipe(writeStream);
-    //console.log('Hashing: ', filename);
     stream.on('data', function (data) {
       hash.update(data, 'utf8');
     });

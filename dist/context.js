@@ -1,5 +1,3 @@
-'use strict';
-
 (function () {
 
   var path = require('path');
@@ -18,7 +16,7 @@
     return new Context(argv);
   }
 
-  var Context = function Context(argv) {
+  var Context = function (argv) {
     this.argv = argv ? argv : {};
     this.defaultConfig = DEFAULT_CLI_CONFIG;
     this.sourceDirectory = getSourceDirectory(argv);

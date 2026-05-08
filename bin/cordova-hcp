@@ -3,19 +3,28 @@ var path = require('path'),
     argv = require('yargs').argv,
     chcpContext = require(path.resolve(__dirname, '..', 'dist', 'context.js'));
 
+function printUsage() {
+  console.log('Usage: cordova-hcp <command>');
+  console.log('Commands:');
+  console.log('  build - Build the project');
+  console.log('  init - Initialize the project');
+  console.log('  help - Show help');
+  process.exit(0);
+}
+
 var cmd = argv._[0];
 switch(cmd) {
   case 'build':
-  case 'login':
   case 'init':
-  case 'server':
-  case 'deploy':
     console.log('Running ' + cmd);
     var command = require(path.resolve(__dirname, '..', 'dist', cmd + '.js')),
-      context = chcpContext.context(argv);
+        context = chcpContext.context(argv);
     command.execute(context);
     break;
+  case 'help':
+    printUsage();
+    break;
   default:
-    console.log('TODO: Should print usage instructions.');
-    process.exit(0);
+    console.error('Unknown command: ' + cmd);
+    printUsage();
 }
